@@ -1,11 +1,11 @@
 "use client"
 
-import { ConnectButton } from "@/libs/chromia-connect/connect-button";
+import { ConnectKitButton } from "connectkit";
 
 const Unauthenticated = () => (
     <div>
-        <p>UNAUTHENTICATED</p>
-        <ConnectButton />
+        Unauthenticated!
+        <ConnectKitButton />
     </div>
 )
 

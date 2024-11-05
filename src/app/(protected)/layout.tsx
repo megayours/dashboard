@@ -1,23 +1,34 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 
 const Layout = ({
   authenticated,
   unauthenticated,
-  notRegistered
 }: Readonly<{
   authenticated: React.ReactNode;
   unauthenticated: React.ReactNode;
-  notRegistered: React.ReactNode;
 }>) => {
-  // const { isLoading, authStatus } = useChromia();
-  const [isInitialLoad, setIsInitialLoad] = useState(false);
+  const { address } = useAccount();
 
-  if (isInitialLoad) {
-    return <div>Starting up</div>
+  console.log('Current address:', address);
+  console.log('Authenticated component:', authenticated);
+  console.log('Unauthenticated component:', unauthenticated);
+
+  if (address) {
+    return (
+      <>
+        {authenticated}
+        <div style={{ display: 'none' }}>{unauthenticated}</div>
+      </>
+    );
   }
 
-  return <div>{unauthenticated}</div>
+  return (
+    <>
+      <div style={{ display: 'none' }}>{authenticated}</div>
+      {unauthenticated}
+    </>
+  );
 }
 
 export default Layout;
