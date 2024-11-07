@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 
 import { ClientProviders } from './client-providers'
 import { getWagmiConfig } from '@/config/wagmi-config';
+import './globals.css';
 
 
 export const metadata: Metadata = {
