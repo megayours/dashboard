@@ -1,8 +1,8 @@
 import { type PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
+import Header from '@/components/Header/page';
 
 import { ClientProviders } from './client-providers'
-import { getWagmiConfig } from '@/config/wagmi-config';
 import './globals.css';
 
 
@@ -16,8 +16,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <html>
-    <body>
+    <body className="dashboard-background">
         <ClientProviders>
+          <Header />
           {children}
         </ClientProviders>
     </body>

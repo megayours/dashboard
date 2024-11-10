@@ -9,6 +9,10 @@ export default {
     {
       name: "Fishing Game",
       blockchainRid: "C94B31FBE76B85285C999B67C3FB5AC5D61961A1B275CF85F197099E86F5A0C6"
+    },
+    {
+      name: "Gamma Chain",
+      blockchainRid: "0C034CAB6586CD4F38EAF56721905BA388762906CA75C0C67650F9AB2E69C7BC"
     }
   ]
 }

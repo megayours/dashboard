@@ -8,11 +8,12 @@ export const yoursProtocolQueries = {
   TOKENS: 'tokens'
 };
 
-type Token = {
+export type Token = {
   project: string;
   collection: string;
   token_id: string;
   type: string;
+  amount: number;
 }
 
 type YoursProject = {
@@ -32,6 +33,8 @@ export type TokenMetadata = {
   yours: YoursMetadata;
 }
 
+type TokenResponse = TokenMetadata & { current_brid: string; token_id: string; };
+
 const cachedClients = new Map<string, IClient>();
 
 export function useYoursProtocol() {
@@ -44,7 +47,7 @@ export function useYoursProtocol() {
     queryKey: [yoursProtocolQueries.TOKENS, address, selectedDapps.map(d => d.blockchainRid)],
     queryFn: async () => {
       if (!address) return [];
-      const allTokens: TokenMetadata[] = [];
+      const allTokens: TokenResponse[] = [];
 
       const seenTokens = new Set<string>();
       console.log('selectedDapps', selectedDapps);
@@ -60,7 +63,7 @@ export function useYoursProtocol() {
             page_size: 1,
             page_cursor: null
           });
-          console.log('accounts', accounts);
+          console.log('accounts', dapp.blockchainRid, accounts);
           
           if (accounts.data.length === 0) continue;
           
@@ -80,9 +83,9 @@ export function useYoursProtocol() {
                 token_id: token.token_id
               });
               
-              return metadata;
+              return {...metadata, current_brid: dapp.blockchainRid, token_id: token.token_id};
             })
-          ).then(results => results.filter((v): v is TokenMetadata => v !== null));
+          ).then(results => results.filter((v): v is TokenResponse => v !== null));
 
           allTokens.push(...tokensWithMetadata);
           console.log('allTokens', allTokens);

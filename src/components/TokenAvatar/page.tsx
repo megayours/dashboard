@@ -17,11 +17,13 @@ const TokenAvatar = ({ image, alt }: { image: string; alt: string }) => {
     const [imgSrc, setImgSrc] = React.useState<string | null>(null);
 
     React.useEffect(() => {
+        if(image) {
         renderImage().then(setImgSrc);
+        }
     }, [image]);
 
     return (
-        <div className="w-10 h-10 rounded-full overflow-hidden">
+        <div>
             {imgSrc && <img src={imgSrc} alt={alt} className="object-cover w-full h-full" />}
         </div>
     );

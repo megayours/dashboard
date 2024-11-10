@@ -25,6 +25,7 @@ function AuthenticatedContent() {
 
     const { tokens, isLoading } = useYoursProtocol();
 
+
     console.log('tokens', tokens);
 
     return (
@@ -39,9 +40,11 @@ function AuthenticatedContent() {
                 <div >
                     {tokens.map((token,i) =>{
                         return (
-                            <Link key={token.yours.project.name+"_"+i} href={`/token/blockchainrid/${token.yours.project.blockchain_rid.toString('hex')}`} className="flex items-center p-4 rounded-lg shadow-md mb-4">
+                            <Link key={token.yours.project.name+"_"+i} href={`/token/brid/${token.current_brid}/projectname/${token.yours.project.name}/tokenid/${token.token_id}`} className="flex items-center p-4 rounded-lg shadow-md mb-4">
                                 <div className="flex-shrink-0 h-full">
-                                    <TokenAvatar image={token.properties?.image} alt={token.name} />
+                                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                                        <TokenAvatar image={token.properties?.image} alt={token.name} />
+                                    </div>
                                 </div>
                                 <div className="ml-4 flex-grow flex flex-col">
                                     <span className="text-lg font-semibold">{token.name}</span>
@@ -50,6 +53,7 @@ function AuthenticatedContent() {
                                 <div className="flex-shrink-0 h-full">
                                     <BlockchainLogo blockchain={token.yours.project.blockchain_rid.toString('hex')} />
                                 </div>
+                                    
                             </Link>
                         )
                     })}
