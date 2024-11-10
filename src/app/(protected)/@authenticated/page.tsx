@@ -5,7 +5,10 @@ import { useDappSelection } from "@/app/hooks/useDappSelection";
 import { useYoursProtocol } from "@/app/hooks/useYoursProtocol";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { Dapp } from "@/app/hooks/useDappSelection";
+import Link from 'next/link';
 
+import TokenAvatar from "@/components/TokenAvatar/page";
+import BlockchainLogo from "@/components/BlockchainLogo/page";
 // Create a client
 const queryClient = new QueryClient();
 
@@ -22,11 +25,39 @@ function AuthenticatedContent() {
 
     const { tokens, isLoading } = useYoursProtocol();
 
+
+    console.log('tokens', tokens);
+
     return (
         <div className="p-4">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Your Dapps & Tokens</h1>
                 <ConnectKitButton />
+            </div>
+            
+            <div>
+                <h1 className="text-xl font-semibold mb-4">Your Tokens</h1>
+                <div >
+                    {tokens.map((token,i) =>{
+                        return (
+                            <Link key={token.yours.project.name+"_"+i} href={`/token/brid/${token.current_brid}/projectname/${token.yours.project.name}/tokenid/${token.token_id}`} className="flex items-center p-4 rounded-lg shadow-md mb-4">
+                                <div className="flex-shrink-0 h-full">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                                        <TokenAvatar image={token.properties?.image} alt={token.name} />
+                                    </div>
+                                </div>
+                                <div className="ml-4 flex-grow flex flex-col">
+                                    <span className="text-lg font-semibold">{token.name}</span>
+                                    <span className="text-sm text-gray-600">{token.yours.project.name}</span>
+                                </div>
+                                <div className="flex-shrink-0 h-full">
+                                    <BlockchainLogo blockchain={token.yours.project.blockchain_rid.toString('hex')} />
+                                </div>
+                                    
+                            </Link>
+                        )
+                    })}
+                </div>
             </div>
             
             {/* Dapps Selection Section */}
