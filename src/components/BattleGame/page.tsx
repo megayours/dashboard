@@ -18,7 +18,7 @@ const BattleGame = ({chain, amoyContract, tokenId, owner, project, collection}: 
     return !battleGameData && !isLoading? <div><h1>Battle Game</h1><p>Metadata not extended</p></div> : <div className="container mx-auto space-y-4">
         
         {address && address !== owner ? <Link href={`https://t.me/MegaYoursDemoBot/megayours` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
-            <h1>Battle Game</h1>
+            Extend metadata:<h1>Battle Game</h1>
         </Link> : <h1>Battle Game</h1>} 
         <div className="container mx-auto">
             <div className="flex flex-wrap space-y-2">

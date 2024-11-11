@@ -51,7 +51,7 @@ const FishingGame = ({chain, amoyContract, tokenId, owner, project, collection}:
        
         !fishingGameData && !isLoading? <div><h1>Fishing Game</h1><p>Metadata not extended</p><Link href={`https://demo-fishing-dapp.vercel.app/` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>Extend them now!</Link></div> : <div className="container mx-auto space-y-4">
             {address && address !== owner ? <a href={`https://demo-fishing-dapp.vercel.app/` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
-                <h1>Fishing Game</h1>
+                Extend metadata: <h1>Fishing Game</h1>
             </a> : <h1>Fishing Game</h1>}
             <div className="container mx-auto">
                 <div className="flex flex-wrap space-y-2">
