@@ -7,8 +7,8 @@ import './globals.css';
 
 
 export const metadata: Metadata = {
-  title: 'Your Application Title Goes Here',
-  description: 'Your application description goes here',
+  title: 'MegaYours Dashboard',
+  description: 'Explor any asset on chain and bring it to life!',
 };
 
 
