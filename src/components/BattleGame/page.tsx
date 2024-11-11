@@ -3,6 +3,7 @@
 import useBattleGameData from "@/app/hooks/battle/useBattleGameData";
 import TokenAvatar from "../TokenAvatar/page";
 import Link from "next/link";
+import { useAccount } from "wagmi";
 
 
 const BattleGame = ({chain, amoyContract, tokenId, owner, project, collection}: {chain: string, amoyContract: string, tokenId: number, owner: string, project: string, collection: string}) => {
@@ -10,13 +11,15 @@ const BattleGame = ({chain, amoyContract, tokenId, owner, project, collection}: 
 
     const { equipped, armors, weapons, battleHistory } = battleGameData || { equipped: null, armors: null, weapons: null, battleHistory: null };
 
+    const { address } = useAccount();
     console.log("BATTLE GAME DATA", battleHistory);
 
     
     return !battleGameData && !isLoading? <div><h1>Battle Game</h1><p>Metadata not extended</p></div> : <div className="container mx-auto space-y-4">
-        <Link href={`https://t.me/MegaYoursDemoBot/megayours` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
+        
+        {address && address !== owner ? <Link href={`https://t.me/MegaYoursDemoBot/megayours` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
             <h1>Battle Game</h1>
-        </Link>
+        </Link> : <h1>Battle Game</h1>} 
         <div className="container mx-auto">
             <div className="flex flex-wrap space-y-2">
                 {armors && Array.isArray(armors) && armors.map((armor: any) => (

@@ -4,8 +4,12 @@ import useFishingGameData from "@/app/hooks/fishing/useFishingGameData";
 import { useEffect, useState } from "react";
 import './FishingGame.css'; // Import the CSS file for pulsing effect
 import Link from "next/link";
+
+import { useAccount } from "wagmi";
+
 const FishingGame = ({chain, amoyContract, tokenId, owner, project, collection}: {chain: string, amoyContract: string, tokenId: number, owner: string, project: string, collection: string}) => {
 
+    const { address } = useAccount();
     const { fishingGameData, isLoading } = useFishingGameData(chain, amoyContract, tokenId, owner, project, collection);
 
     const { rods, fish, armors, weapons } = fishingGameData || { rods: null, fish: null, armors: null, weapons: null };
@@ -46,9 +50,9 @@ const FishingGame = ({chain, amoyContract, tokenId, owner, project, collection}:
     return (
        
         !fishingGameData && !isLoading? <div><h1>Fishing Game</h1><p>Metadata not extended</p><Link href={`https://demo-fishing-dapp.vercel.app/` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>Extend them now!</Link></div> : <div className="container mx-auto space-y-4">
-            <a href={`https://demo-fishing-dapp.vercel.app/` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
+            {address && address !== owner ? <a href={`https://demo-fishing-dapp.vercel.app/` } target="_blank" rel="noopener noreferrer" style={{color: 'blue', textDecoration: 'underline'}}>
                 <h1>Fishing Game</h1>
-            </a>
+            </a> : <h1>Fishing Game</h1>}
             <div className="container mx-auto">
                 <div className="flex flex-wrap space-y-2">
                     {rods && rods.map((rod: any) => (
