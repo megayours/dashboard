@@ -51,7 +51,7 @@ const GammaMetadata = ({ token }: { token: GammaChainTokenMetadata }) => {
                 <div className="w-1/2 container mx-auto">
                     <h1 className="text-2xl font-bold">Available Chains</h1>
                     <div className="flex flex-col mt-2">
-                        <YoursCard chain={token.chain} amoyContract={token.address} tokenId={token.token_id} owner={token.owner} />
+                        <YoursCard chain={token.chain} amoyContract={token.address} tokenId={token.token_id} owner={token.owner} project={token.project} collection={token.collection}/>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ type AccountPage = {
 }
 
 
-const BattleGameData = ({chain, amoyContract, tokenId, owner}: {chain: string, amoyContract: string, tokenId: number, owner: string}) => {
+const BattleGameData = ({chain, amoyContract, tokenId, owner, project, collection}: {chain: string, amoyContract: string, tokenId: number, owner: string, project: string, collection: string}) => {
     const directoryNodeUrlPool = dapps.directoryNodeUrlPool;
     const brid = dapps.chains.find(d => d.name === "Battle Game")?.blockchainRid;
 
@@ -26,6 +26,19 @@ const BattleGameData = ({chain, amoyContract, tokenId, owner}: {chain: string, a
             const account = await client.query<AccountPage>('ft4.get_accounts_by_signer', {id: owner, page_size: null, page_cursor: null});
             if (account.data.length < 1) return null;
             const accountId = account.data[0].id;
+
+            const equippedPfp = await client.query('pfps.get_equipped', {account_id: accountId});
+            // const equippedPfpYours = await client.query('yours.get_token_balance', {project: equippedPfp!.project, token_id: parseInt(equippedPfp!.id), collection: equippedPfp!.collection});
+            // const equippedPfpYours = await client.query('yours.get_token_balances', {account_id: accountId});
+            console.log("EQUIPPED BATTLE", equippedPfp, project, collection, tokenId);
+
+            if(equippedPfp!.project != project ||
+                equippedPfp!.collection != collection ||
+                equippedPfp!.id != tokenId
+            ) {
+                console.log("PFP not equipped");
+                return null;
+            }
             
             const equipped = await client.query('equipments.get_equipped', {account_id: accountId});
             const armors = await client.query('equipments.get_armor', {account_id: accountId, slot: "all"});
