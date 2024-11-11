@@ -8,7 +8,7 @@ const GammaMetadata = ({ token }: { token: GammaChainTokenMetadata }) => {
     console.log("Token", token);
 
     return <div className="">
-            <Link href={`/token/chain/${token.chain}/contract/${token.address.toString('hex')}/id/${token.token_id}`}>
+            <Link href={`/token/chain/${token.chain}/contract/${Buffer.from(token.address).toString("hex")}/id/${token.token_id}`}>
                 <div className="flex justify-between items-center px-6 py-4">
                     <div>
                         <h1 className="font-bold text-3xl mb-2">{token.project}</h1>

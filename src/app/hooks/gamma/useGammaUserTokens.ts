@@ -13,7 +13,7 @@ export function useGammaUserTokens(address: string) {
         queryKey: [gammaUserTokensQueries.USER_TOKENS, address],
         queryFn: async () => {
             const client = await createClient({ directoryNodeUrlPool, blockchainRid: dapps.chains.find(d => d.name === "Gamma Chain")?.blockchainRid });
-            const userTokens = await client.query<UserToken[]>('oracle.tracked_token', { address });
+            const userTokens = await client.query<any[]>('oracle.tracked_token', { address });
             return [];
         }
     })

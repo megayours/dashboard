@@ -26,7 +26,7 @@ function AuthenticatedContent() {
     const { tokens, isLoading } = useYoursProtocol();
 
 
-    console.log('tokens', tokens);
+    console.log('tokens', tokens, selectedDapps);
 
     return (
         <div className="p-4">

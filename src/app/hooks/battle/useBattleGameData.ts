@@ -27,15 +27,15 @@ const BattleGameData = ({chain, amoyContract, tokenId, owner, project, collectio
             if (account.data.length < 1) return null;
             const accountId = account.data[0].id;
 
-            const equippedPfp = await client.query('pfps.get_equipped', {account_id: accountId});
+            const equippedPfp = await client.query<any>('pfps.get_equipped', {account_id: accountId});
             // const equippedPfpYours = await client.query('yours.get_token_balance', {project: equippedPfp!.project, token_id: parseInt(equippedPfp!.id), collection: equippedPfp!.collection});
             // const equippedPfpYours = await client.query('yours.get_token_balances', {account_id: accountId});
             console.log("EQUIPPED BATTLE", equippedPfp, project, collection, tokenId);
 
-            if(equippedPfp!.project != project ||
+            if(equippedPfp && (equippedPfp!.project != project ||
                 equippedPfp!.collection != collection ||
                 equippedPfp!.id != tokenId
-            ) {
+            )) {
                 console.log("PFP not equipped");
                 return null;
             }

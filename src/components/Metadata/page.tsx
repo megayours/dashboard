@@ -46,7 +46,7 @@ const Metadata = ({ brid, project, collection, tokenId, owner }: { brid: string,
                     {metadata?.map((m) => {
                         return <div key={m.name} className="border-b py-2">
                             
-                            {m.name == "Battle Game"? <BattleGame /> : null}
+                            {/* {m.name == "Battle Game"? <BattleGame /> : null} */}
                             {/* {m.name == "Fishing Game"? <FishingGame /> : null} */}
 
                             

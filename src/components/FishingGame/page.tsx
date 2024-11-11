@@ -10,7 +10,7 @@ const FishingGame = ({chain, amoyContract, tokenId, owner, project, collection}:
 
     const { rods, fish, armors, weapons } = fishingGameData || { rods: null, fish: null, armors: null, weapons: null };
 
-    const [fishBackgrounds, setFishBackgrounds] = useState<{[key: number]: string}>({});
+    const [fishBackgrounds, setFishBackgrounds] = useState<{[key: number]: any}>({});
     const [isFirstUpdate, setIsFirstUpdate] = useState(true);
     const [pulsingFishIds, setPulsingFishIds] = useState<Set<number>>(new Set()); // Track pulsing fish IDs
 

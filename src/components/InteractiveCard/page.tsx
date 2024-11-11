@@ -14,7 +14,7 @@ const InteractiveCard = ({ chain="amoy", contract, tokenId }: { chain: string, c
         if(metadata) {
             setTokenMetadata(metadata);
             console.log("ADDRESS", address);
-            console.log("TOKEN METADATA", metadata.owner.toString('hex'));
+            console.log("TOKEN METADATA", metadata.owner.toString());
         }
     }, [metadata, isLoading])
 
@@ -23,7 +23,7 @@ const InteractiveCard = ({ chain="amoy", contract, tokenId }: { chain: string, c
         {
         tokenMetadata &&
          address &&  
-         "0x"+tokenMetadata.owner.toString('hex').toLowerCase() == address.toLowerCase() &&
+         "0x"+tokenMetadata.owner.toString().toLowerCase() == address.toLowerCase() &&
          <div className="bg-primary text-white text-center p-4 rounded-lg">
             <h1 className="text-2xl font-bold">You are the owner of this token!</h1>
          </div>

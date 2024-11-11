@@ -26,7 +26,7 @@ export const TokenCard = ({ brid, tokenId }: { brid: string, tokenId: number }) 
                     <span className="text-white font-thin">#{token.token_id}</span>
                 </div>
             </div>
-            <Metadata brid={brid} project={token.project} collection={token.collection} tokenId={parseInt(token.token_id)} />
+            {/* <Metadata brid={brid} project={token.project} collection={token.collection} tokenId={parseInt(token.token_id)} /> */}
         </div>
     </div>
 }

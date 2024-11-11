@@ -1,10 +1,9 @@
 "use client"
 
-import { useGammaChain } from "@/app/hooks/gamma/useGammaChain";
 import { useState } from "react";
+import { useGammaChain } from "@/app/hooks/gamma/useGammaChain";
 
-import dapps from "@/config/dapps";
-import { useAccount } from "wagmi";
+
 import InteractiveCard from "@/components/InteractiveCard/page";
 
 const Interactive = () => {

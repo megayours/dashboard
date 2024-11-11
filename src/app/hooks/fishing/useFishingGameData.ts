@@ -30,25 +30,25 @@ const FishingGameData = (chain: string, amoyContract: string, tokenId: number, o
             const accountId = account.data[0].id;
 
 
-            const equippedPfp = await client.query('pfps.get_equipped', {account_id: accountId});
+            const equippedPfp = await client.query<any>('pfps.get_equipped', {account_id: accountId});
 
             // const equippedPfpYours = await client.query('yours.get_token_balance', {project: equippedPfp!.project, token_id: parseInt(equippedPfp!.id), collection: equippedPfp!.collection});
             // const equippedPfpYours = await client.query('yours.get_token_balances', {account_id: accountId});
             // console.log("EQUIPPED PFP", equippedPfp, project, collection, tokenId);
 
-            if(equippedPfp!.project != project ||
+            if(equippedPfp && (equippedPfp!.project != project ||
                 equippedPfp!.collection != collection ||
                 equippedPfp!.id != tokenId
-            ) {
+            )) {
                 console.log("PFP not equipped");
                 return null;
             }
                 
-            const rods = await client.query('fishing.get_rods', {account_id: accountId})
-            const fish = await client.query('fishing.get_caught_fishes', {account_id: accountId})
-            const equipped = await client.query('equipments.get_equipped', {account_id: accountId});
-            const armors = await client.query('equipments.get_armor', {account_id: accountId, slot: "all"});
-            const weapons = await client.query('equipments.get_weapon', {account_id: accountId});
+            const rods = await client.query<any>('fishing.get_rods', {account_id: accountId})
+            const fish = await client.query<any>('fishing.get_caught_fishes', {account_id: accountId})
+            const equipped = await client.query<any>('equipments.get_equipped', {account_id: accountId});
+            const armors = await client.query<any>('equipments.get_armor', {account_id: accountId, slot: "all"});
+            const weapons = await client.query<any>('equipments.get_weapon', {account_id: accountId});
             
             console.log("ACCOUNT ID", rods, fish, equipped, armors, weapons);
             console.log("FISHING GAME DATA");
